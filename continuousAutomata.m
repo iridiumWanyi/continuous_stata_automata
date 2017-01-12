@@ -3,16 +3,9 @@ clf
 n=16; % lattice size
 depth=3; % neighborhood depth
 l=.6; % diminishing factor
-K=60; % steps
-% a(:,:,1)=rand(n)./d;
-% a(:,:,1)=round(rand(n));
-% a=rand(n);
-% the patched matrix
-% [[a(n,n),a(n,:),a(n,1)];[a(:,n),a,a(:,1)];[a(1,n),a(1,:),a(1,1)]]
-
-lx=kron(1:n,ones(n,1));
-ly=kron((1:n)',ones(1,n));
-%%
+K=42; % steps
+lx=kron(1:n,ones(n,1)); % x coordinates of all grids
+ly=kron((1:n)',ones(1,n)); % y coordinates of all grids
 % initialization
 a=zeros(n,n,K); 
 a(:,:,1)=rand(n);
@@ -27,7 +20,7 @@ for k=1:K-1 % steps loop
             for m=1:depth
                 s=s+(sum(a(find(dis<m+1)))-a(i,j,k))/m^l;
             end
-            a(i,j,k+1)=max(a(i,j,k)+1.1-abs(2.8-s)/2,0);
+            a(i,j,k+1)=max(a(i,j,k)+1.1-abs(2.8-s)/1,0);
         end
     end
 end
